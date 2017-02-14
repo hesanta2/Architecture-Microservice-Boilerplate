@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -17,12 +18,6 @@ namespace µService.WebApi
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
             //http://www.strathweb.com/2013/06/supporting-only-json-in-asp-net-web-api-the-right-way/
             var jsonFormatter = new JsonMediaTypeFormatter();
@@ -36,6 +31,7 @@ namespace µService.WebApi
             public JsonContentNegotiator(JsonMediaTypeFormatter formatter)
             {
                 _jsonFormatter = formatter;
+                _jsonFormatter.SerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
             }
 
             public ContentNegotiationResult Negotiate(

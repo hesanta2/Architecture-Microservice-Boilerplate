@@ -1,4 +1,5 @@
-﻿using System;
+﻿using µService.Infrastructure.Persistence;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,16 @@ namespace µService.WebApi
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+        }
+
+        protected void Application_BeginRequest()
+        {
+            UnityOfWork.Initialize();
+        }
+
+        protected void Application_EndRequest()
+        {
+            UnityOfWork.Dispose();
         }
     }
 }

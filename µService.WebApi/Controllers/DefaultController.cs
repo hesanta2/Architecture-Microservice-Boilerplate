@@ -1,4 +1,6 @@
-﻿using System;
+﻿using µService.Infrastructure;
+using µService.Infrastructure.Persistence;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,18 +9,19 @@ using System.Web.Http;
 
 namespace µService.WebApi.Controllers
 {
-    public class ValuesController : ApiController
+    [RoutePrefix("")]
+    public class DefaultController : ApiController
     {
-        // GET: api/Values
-        public IEnumerable<string> Get()
+        [Route("")]
+        public IEnumerable<Products> Get()
         {
-            return new string[] { "value1", "value2" };
+            return UnityOfWork.Context.Products;
         }
 
         // GET: api/Values/5
-        public string Get(int id)
+        public IEnumerable<Products> Get(string id)
         {
-            return "value";
+            return UnityOfWork.Context.Products.Where(p => p.Product_Name.Contains(id));
         }
 
         // POST: api/Values

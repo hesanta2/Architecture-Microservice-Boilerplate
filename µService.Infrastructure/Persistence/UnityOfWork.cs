@@ -23,6 +23,8 @@ namespace µService.Infrastructure.Persistence
 
         public static void Dispose()
         {
+            if (_context == null) return;
+
             _context.SaveChanges();
             _context.Dispose();
         }

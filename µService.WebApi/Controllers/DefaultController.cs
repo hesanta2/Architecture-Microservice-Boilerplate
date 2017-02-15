@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace µService.WebApi.Controllers
 {
-    [RoutePrefix("")]
+    [RoutePrefix("Default")]
     public class DefaultController : ApiController
     {
         [Route("")]
@@ -18,10 +18,10 @@ namespace µService.WebApi.Controllers
             return UnityOfWork.Context.Products;
         }
 
-        // GET: api/Values/5
-        public IEnumerable<Products> Get(string id)
+        [Route("id")]
+        public IEnumerable<Products> Get(int id)
         {
-            return UnityOfWork.Context.Products.Where(p => p.Product_Name.Contains(id));
+            return UnityOfWork.Context.Products.Where(p => p.Product_ID == id);
         }
 
         // POST: api/Values

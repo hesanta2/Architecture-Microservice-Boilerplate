@@ -7,7 +7,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http;
 
-namespace µService.WebApi
+namespace µService.Infrastructure.WebApi
 {
     public static class WebApiConfig
     {

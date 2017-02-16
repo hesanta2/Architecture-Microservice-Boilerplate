@@ -32,6 +32,7 @@ namespace µService.Infrastructure.WebApi
             {
                 _jsonFormatter = formatter;
                 _jsonFormatter.SerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                _jsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
             }
 
             public ContentNegotiationResult Negotiate(
